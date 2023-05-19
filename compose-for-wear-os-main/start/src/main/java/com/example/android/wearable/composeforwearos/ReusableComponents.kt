@@ -50,29 +50,59 @@ import androidx.wear.compose.material.ToggleChip
 import androidx.wear.compose.material.ToggleChipDefaults
 import com.example.android.wearable.composeforwearos.theme.WearAppTheme
 
-/* Contains individual Wear OS demo composables for the code lab. */
 
-// TODO: Create a Button Composable (with a Row to center)
 @Composable
 fun ButtonExample(
     modifier: Modifier = Modifier,
     iconModifier: Modifier = Modifier
 ) {
-
+    Row(         // 중앙 배치를 위한 껍데기로 사용
+        modifier = modifier,
+        horizontalArrangement = Arrangement.Center
+    ) {
+        Button( // ButtonDefaults.LargeButtonSize  는 웨어에 최적화된 버튼 사이즈. 반드시 사용할 것
+            modifier = Modifier.size(ButtonDefaults.LargeButtonSize), onClick = { /*TODO*/ }) {
+            Icon(
+                imageVector = Icons.Rounded.Phone,
+                contentDescription = "null",
+                modifier = iconModifier
+            )
+        }
+    }
 }
 
-// TODO: Create a Text Composable
 @Composable
 fun TextExample(modifier: Modifier = Modifier) {
+    Text(
+        modifier = modifier,
+        textAlign = TextAlign.Center,
+        color = MaterialTheme.colors.primary,
+        text = stringResource(id = R.string.device_shape)
+    )
 
 }
 
-// TODO: Create a Card (specifically, an AppCard) Composable
+
 @Composable
 fun CardExample(
     modifier: Modifier = Modifier,
     iconModifier: Modifier = Modifier
 ) {
+    AppCard(onClick = { /*TODO*/ },
+        appName = { Text(text = "Message") },
+        time = { Text(text = "12m") },
+        title = { Text(text = "Kim JaeWon") },
+        modifier = modifier,
+        appImage = {
+            Icon(
+                imageVector = Icons.Rounded.Message,
+                contentDescription = "message icon",
+                modifier = iconModifier
+            )
+        }
+    ) {
+        Text(text = "I Want go home")
+    }
 
 }
 
@@ -136,8 +166,12 @@ fun StartOnlyTextComposablesPreview() {
 fun ButtonExamplePreview() {
     WearAppTheme {
         ButtonExample(
-            modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp),
-            iconModifier = Modifier.size(24.dp).wrapContentSize(align = Alignment.Center)
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 8.dp),
+            iconModifier = Modifier
+                .size(24.dp)
+                .wrapContentSize(align = Alignment.Center)
         )
     }
 }
@@ -156,7 +190,9 @@ fun ButtonExamplePreview() {
 fun TextExamplePreview() {
     WearAppTheme {
         TextExample(
-            modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp)
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 8.dp)
         )
     }
 }
@@ -175,8 +211,12 @@ fun TextExamplePreview() {
 fun CardExamplePreview() {
     WearAppTheme {
         CardExample(
-            modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp),
-            iconModifier = Modifier.size(24.dp).wrapContentSize(align = Alignment.Center)
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 8.dp),
+            iconModifier = Modifier
+                .size(24.dp)
+                .wrapContentSize(align = Alignment.Center)
         )
     }
 }
@@ -196,8 +236,12 @@ fun CardExamplePreview() {
 fun ChipExamplePreview() {
     WearAppTheme {
         ChipExample(
-            modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp),
-            iconModifier = Modifier.size(24.dp).wrapContentSize(align = Alignment.Center)
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 8.dp),
+            iconModifier = Modifier
+                .size(24.dp)
+                .wrapContentSize(align = Alignment.Center)
         )
     }
 }
@@ -216,7 +260,9 @@ fun ChipExamplePreview() {
 fun ToggleChipExamplePreview() {
     WearAppTheme {
         ToggleChipExample(
-            modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp)
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 8.dp)
         )
     }
 }

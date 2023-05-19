@@ -1,18 +1,3 @@
-/*
- * Copyright 2021 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.example.android.wearable.composeforwearos
 
 import android.os.Bundle
@@ -43,22 +28,13 @@ import androidx.wear.compose.material.rememberScalingLazyListState
 import com.example.android.wearable.composeforwearos.theme.WearAppTheme
 
 /**
- * This code lab is meant to help existing Compose developers get up to speed quickly on
- * Compose for Wear OS.
- *
- * The code lab walks through a majority of the simple composables for Wear OS (both similar to
- * existing mobile composables and new composables).
- *
- * It also covers more advanced composables like [ScalingLazyColumn] (Wear OS's version of
- * [LazyColumn]) and the Wear OS version of [Scaffold].
- *
- * Check out [this link](https://android-developers.googleblog.com/2021/10/compose-for-wear-os-now-in-developer.html)
- * for more information on Compose for Wear OS.
+https://android-developers.googleblog.com/2021/10/compose-for-wear-os-now-in-developer.html)
  */
+
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContent {
             WearApp()
         }
@@ -74,36 +50,38 @@ fun WearApp() {
         /* *************************** Part 4: Wear OS Scaffold *************************** */
         // TODO (Start): Create a Scaffold (Wear Version)
 
-            // Modifiers used by our Wear composables.
-            val contentModifier = Modifier.fillMaxWidth().padding(bottom = 8.dp)
-            val iconModifier = Modifier.size(24.dp).wrapContentSize(align = Alignment.Center)
+        // Modifiers used by our Wear composables.
+        val contentModifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = 8.dp)
+        val iconModifier = Modifier
+            .size(24.dp)
+            .wrapContentSize(align = Alignment.Center)
 
-            /* *************************** Part 3: ScalingLazyColumn *************************** */
-            // TODO: Swap a ScalingLazyColumn (Wear's version of LazyColumn)
-            LazyColumn(
-                modifier = Modifier.fillMaxSize(),
-                contentPadding = PaddingValues(
-                    top = 32.dp,
-                    start = 8.dp,
-                    end = 8.dp,
-                    bottom = 32.dp
-                ),
-                verticalArrangement = Arrangement.Center,
-                state = listState
-            ) {
+        /* *************************** Part 3: ScalingLazyColumn *************************** */
+        // TODO: Swap a ScalingLazyColumn (Wear's version of LazyColumn)
+        LazyColumn(
+            modifier = Modifier.fillMaxSize(),
+            contentPadding = PaddingValues(
+                top = 32.dp,
+                start = 8.dp,
+                end = 8.dp,
+                bottom = 32.dp
+            ),
+            verticalArrangement = Arrangement.Center,
+            state = listState
+        ) {
 
-                // TODO: Remove item; for beginning only.
-                item { StartOnlyTextComposables() }
 
-                /* ******************* Part 1: Simple composables ******************* */
-                item { ButtonExample(contentModifier, iconModifier) }
-                item { TextExample(contentModifier) }
-                item { CardExample(contentModifier, iconModifier) }
+            /* ******************* Part 1: Simple composables ******************* */
+            item { ButtonExample(contentModifier, iconModifier) }
+            item { TextExample(contentModifier) }
+            item { CardExample(contentModifier, iconModifier) }
 
-                /* ********************* Part 2: Wear unique composables ********************* */
-                item { ChipExample(contentModifier, iconModifier) }
-                item { ToggleChipExample(contentModifier) }
-            }
+            /* ********************* Part 2: Wear unique composables ********************* */
+            item { ChipExample(contentModifier, iconModifier) }
+            item { ToggleChipExample(contentModifier) }
+        }
 
         // TODO (End): Create a Scaffold (Wear Version)
 

@@ -65,14 +65,13 @@ android {
 
 
 dependencies {
-    // TODO: Review Dependencies
     // General Compose dependencies
     implementation "androidx.activity:activity-compose:$activity_compose_version"
     implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
     implementation "androidx.compose.foundation:foundation:$compose_version"
     implementation "androidx.compose.material:material-icons-extended:$compose_version"
 
-    // Compose for Wear OS Dependencies
+    //웨어에서 컴포즈를 사용하기 위해
     implementation "androidx.wear.compose:compose-material:$wear_compose_version"
 
     // Foundation is additive, so you can use the mobile version in your Wear OS app.
