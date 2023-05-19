@@ -44,8 +44,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun WearApp() {
     WearAppTheme {
-        // TODO: Swap to ScalingLazyListState
-        val listState = rememberLazyListState()
+        val listState = rememberScalingLazyListState() // 상태 기억하기.
 
         /* *************************** Part 4: Wear OS Scaffold *************************** */
         // TODO (Start): Create a Scaffold (Wear Version)
@@ -58,20 +57,21 @@ fun WearApp() {
             .size(24.dp)
             .wrapContentSize(align = Alignment.Center)
 
-        /* *************************** Part 3: ScalingLazyColumn *************************** */
-        // TODO: Swap a ScalingLazyColumn (Wear's version of LazyColumn)
-        LazyColumn(
-            modifier = Modifier.fillMaxSize(),
-            contentPadding = PaddingValues(
-                top = 32.dp,
-                start = 8.dp,
-                end = 8.dp,
-                bottom = 32.dp
-            ),
-            verticalArrangement = Arrangement.Center,
-            state = listState
-        ) {
 
+        /*
+        헤더가 있다면 'ListHearder' 로 첫번째에 설정하느 것이 좋다.
+        Link : https://developer.android.com/reference/kotlin/androidx/wear/compose/material/package-summary#ListHeader(androidx.compose.ui.Modifier,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,kotlin.Function1)
+        헤더가 없다면 autoCentering 변수를 사용하여 충분한 패딩을 준다.
+
+        시각적 효과를 보장하는 기본 설정을 제공하기 때문에
+        padding, verticalArrangement같은 매개변수가 필요 없다.
+         */
+
+        ScalingLazyColumn(
+            modifier = Modifier.fillMaxSize(),
+            state = listState,
+            autoCentering = AutoCenteringParams(0)
+        ) {
 
             /* ******************* Part 1: Simple composables ******************* */
             item { ButtonExample(contentModifier, iconModifier) }
