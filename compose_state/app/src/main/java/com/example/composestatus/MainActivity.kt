@@ -18,6 +18,8 @@ import com.example.composestatus.ui.theme.ComposeStatusTheme
  *  1. 스크롤의 위치
  *  2. 사용자의 프로필 사진
  *  3. 채팅 앱에서 받은 가장 최근의 메세지
+ *
+ *  상태는 존재하고 이벤트는 발생한다.
  */
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,14 +36,6 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
 }
 
 @Preview(showBackground = true)
