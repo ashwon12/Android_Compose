@@ -12,6 +12,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.composestatus.ui.theme.ComposeStatusTheme
 
+
+/**
+ *  APP 의 State 는 특정 시간에 UI에 표시되는 내용
+ *  1. 스크롤의 위치
+ *  2. 사용자의 프로필 사진
+ *  3. 채팅 앱에서 받은 가장 최근의 메세지
+ */
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,7 +29,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    WellnessScreen()
                 }
             }
         }
@@ -41,6 +48,6 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Composable
 fun GreetingPreview() {
     ComposeStatusTheme {
-        Greeting("Android")
+        WellnessScreen()
     }
 }
