@@ -62,13 +62,14 @@ fun WearApp() {
                 // 스크롤 구조에서만 사용하는 것, 블러처리를 주는 기능, 포지션을 전부 지정하여 사용 가능.
                 Vignette(vignettePosition = VignettePosition.TopAndBottom)
             },
+
             positionIndicator = {
                 /*
                 인디케이터는 항상 Scaffold( 시계 ) 안에 있어야 함 , 스크롤 되는 곳 말고!! 가운데 있어야 하기 때문
                 스크롤 위에있어야 스크롤의 위치를 알 수 있음.
                 */
                 PositionIndicator(
-                    scalingLazyListState = listState,
+                    scalingLazyListState = listState
                 )
             }
         ) {
@@ -103,6 +104,40 @@ fun WearApp() {
                 item { ChipExample(contentModifier, iconModifier) }
                 item { ToggleChipExample(contentModifier) }
             }
+        }
+    }
+}
+
+
+@Composable
+fun UseScalingLazyList() {
+    val listState = rememberScalingLazyListState()
+    val contentModifier = Modifier
+        .fillMaxWidth()
+        .padding(bottom = 8.dp)
+    val iconModifier = Modifier
+        .size(24.dp)
+        .wrapContentSize(align = Alignment.Center)
+
+    Scaffold(
+        timeText = { TimeText(modifier = Modifier.scrollAway(listState)}, // 스크롤하면 시간 삭제 되는 구조) },
+        vignette = { Vignette(vignettePosition = VignettePosition.TopAndBottom) },
+        positionIndicator = {
+            PositionIndicator(
+                scalingLazyListState = listState,
+            )
+        }
+    ) {
+        ScalingLazyColumn(
+            modifier = Modifier.fillMaxSize(),
+            state = listState,
+            autoCentering = AutoCenteringParams(0) // 화면 진입 시 가운데로 배치하
+        ) {
+            item { ButtonExample(contentModifier, iconModifier) }
+            item { TextExample(contentModifier) }
+            item { CardExample(contentModifier, iconModifier) }
+            item { ChipExample(contentModifier, iconModifier) }
+            item { ToggleChipExample(contentModifier) }
         }
     }
 }
