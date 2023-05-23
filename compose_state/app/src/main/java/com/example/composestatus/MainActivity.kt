@@ -25,7 +25,9 @@ import com.example.composestatus.ui.theme.ComposeStatusTheme
  *  데이터가 변경될 떄 컴포지션을 업데이트 하기 위해서 컴포저블을 다시 그리는 것을 리컴포지션이라고 칭함.
  *  COmpose에서 틁정 상태를 읽는 리컴포지션의 예약할 수 있는 추적 시스템이 존재함.
  *  -> State, MutableState
- *  
+ *
+ *  상태가 내려가고 (스테이트리스) 이벤트가 올라가는 패턴을 단방향 데이터흐름 UDF 라고 한다.
+ *  컴포즈에서 UDF 를 구현하는 방법을
  *
  */
 class MainActivity : ComponentActivity() {
