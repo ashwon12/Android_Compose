@@ -48,19 +48,21 @@ fun WellnessTaskItem(
 
 /**
  * StateFull 요소
+ *
+ * 체크의 스테이트가 목록단위로 까지 올라왔기 때문에 변경가능한 요소가 필ㄹ요하지 않아짐
  */
-@Composable
-fun WellnessTaskItem(
-    taskItem: String,
-    onClose: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    var checkedState by rememberSaveable { mutableStateOf(false) }
-
-    WellnessTaskItem(taskItem = taskItem, checked = checkedState,
-        onCheckedChange = { newValue ->
-            checkedState = newValue
-
-        }, onClose = onClose
-    )
-}
+//@Composable
+//fun WellnessTaskItem(
+//    taskItem: String,
+//    onClose: () -> Unit,
+//    modifier: Modifier = Modifier
+//) {
+//    var checkedState by rememberSaveable { mutableStateOf(false) }
+//
+//    WellnessTaskItem(taskItem = taskItem, checked = checkedState,
+//        onCheckedChange = { newValue ->
+//            checkedState = newValue
+//
+//        }, onClose = onClose
+//    )
+//}

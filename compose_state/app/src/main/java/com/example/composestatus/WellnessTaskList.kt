@@ -14,7 +14,8 @@ import androidx.compose.ui.Modifier
 fun WellnessTasksList(
     modifier: Modifier = Modifier,
     list: List<WellnessTask>,
-    onCloseTask: (WellnessTask) -> Unit
+    onCloseTask: (WellnessTask) -> Unit,
+    onCheckedTask : (WellnessTask,Boolean) -> Unit
 ) {
     val scrollState = rememberLazyListState()
     LazyColumn(
@@ -23,7 +24,12 @@ fun WellnessTasksList(
     ) {
         items(items =list,
         key = {task -> task.id}) { task ->
-            WellnessTaskItem(taskItem = task.label, onClose = { onCloseTask(task) })
+            WellnessTaskItem(
+                taskItem = task.label,
+                onClose = { onCloseTask(task) },
+                checked = task.checked,
+                onCheckedChange = {checked -> onCheckedTask(task,checked)}
+            )
         }
     }
 }
