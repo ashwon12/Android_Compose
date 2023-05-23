@@ -1,5 +1,6 @@
 package com.example.composestatus
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
@@ -8,5 +9,9 @@ import androidx.compose.ui.Modifier
 fun WellnessScreen(
     modifier: Modifier = Modifier
 ){
-    StatefulCounter(modifier)
+    Column(modifier = modifier) {
+        StatefulCounter()
+        WellnessTasksList()
+    }
+
 }
