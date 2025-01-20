@@ -15,6 +15,9 @@
  */
 package com.example.cupcake
 
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Icon
@@ -28,20 +31,39 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.cupcake.data.DataSource
+import com.example.cupcake.ui.OrderSummaryScreen
 import com.example.cupcake.ui.OrderViewModel
+import com.example.cupcake.ui.SelectOptionScreen
+import com.example.cupcake.ui.StartOrderScreen
 
 /**
  * Composable that displays the topBar and displays back button if back navigation is possible.
  */
+
+
+// 경로 정하기
+enum class CupcakeScreen() {
+    Start,
+    Flavor,
+    Pickup,
+    Summary
+}
+
+
 @Composable
 fun CupcakeAppBar(
     canNavigateBack: Boolean,
     navigateUp: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     TopAppBar(
         title = { Text(stringResource(id = R.string.app_name)) },
@@ -62,12 +84,16 @@ fun CupcakeAppBar(
     )
 }
 
+
+
 @Composable
 fun CupcakeApp(
     viewModel: OrderViewModel = viewModel(),
-    navController: NavHostController = rememberNavController()
+    navController: NavHostController = rememberNavController(),
 ) {
-
+    // NavController : 목적지(즉, 앱의 화면) 간을 탐색하는 역할을 담당합니다.
+    // NavGraph : 탐색할 수 있는 구성 가능한 목적지를 표시
+    // NavHost : NavGraph의 현재 목적지를 표시하기 위한 컨테이너 역할을 하는 구성 가능한 요소입니다.
     Scaffold(
         topBar = {
             CupcakeAppBar(
@@ -78,5 +104,45 @@ fun CupcakeApp(
     ) { innerPadding ->
         val uiState by viewModel.uiState.collectAsState()
 
+        NavHost(
+            navController = navController,
+            startDestination = CupcakeScreen.Start.name,
+            modifier =  Modifier.padding(innerPadding)
+        ){
+            // 컴포저블 함수를 부를 수 있다. 2가지의 파람을 요구한다.
+            // 1. route : 로 이름에 해당하는 문자열입니다
+            // 2. 지정된 경로에 대해 표시하려는 컴포즈 항목
+            composable(route = CupcakeScreen.Start.name ){
+                StartOrderScreen(
+                    quantityOptions = DataSource.quantityOptions,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(dimensionResource(R.dimen.padding_medium))
+                )
+            }
+            composable(route = CupcakeScreen.Flavor.name){
+                val context = LocalContext.current
+                SelectOptionScreen(
+                    subtotal = uiState.price,
+                    options = DataSource.flavors.map { id -> context.resources.getString(id) },
+                    onSelectionChanged = { viewModel.setFlavor(it) },
+                    modifier = Modifier.fillMaxHeight()
+                )
+            }
+            composable(route = CupcakeScreen.Pickup.name) {
+                SelectOptionScreen(
+                    subtotal = uiState.price,
+                    options = uiState.pickupOptions,
+                    onSelectionChanged = { viewModel.setDate(it) },
+                    modifier = Modifier.fillMaxHeight()
+                )
+            }
+            composable(route = CupcakeScreen.Summary.name) {
+                OrderSummaryScreen(
+                    orderUiState = uiState,
+                    modifier = Modifier.fillMaxHeight()
+                )
+            }
+        }
     }
 }
